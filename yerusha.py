@@ -158,7 +158,7 @@ class Person:
         return found_yoresh
 
     def show_tree(self):
-        DotExporter(self.node).to_picture("tmp/tree.png")
+       # DotExporter(self.node).to_picture("tmp/tree.png")
 
     from flask import send_file
 
