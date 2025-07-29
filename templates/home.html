@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block content %}
+		<div class = "home">
+			<p>Welcome!</p>
+		</div>
+
+        <p>See the <a href = "{{url_for('about')}}">About</a> page for an explanation of this app</p>     
+        <p>Please visit the <a href = "{{url_for('demo')}}">Demo</a> page, for a guided tour</p>     
+        <p>Or visit the <a href = "{{url_for('explore')}}">Explore</a> page, to discover on your own</p>     
+{% endblock %}

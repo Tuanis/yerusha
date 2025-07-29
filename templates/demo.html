@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block content %}
+        <div class = "home">
+            <p>{{ message }}</p>
+        </div>
+
+        <img src="{{url_for('static', filename='tree.png')}}" style="max-width:100%;">
+
+        <h1>These are the Yorshim of {{ name }}</h1>
+
+        {% for yoresh in yorshim %}
+            <li>{{yoresh.name}}</li>
+        {% endfor %}
+
+        <p>Do you want to see how the answer was reached?</p>
+        <form method = "post">
+            <input type = "submit" name = "yes" value = "Sure!">
+            <input type = "submit" name = "no"  value = "No, thanks">
+        </form>
+        
+        {% if show_answer %}
+            <h3 id="steps">These are the steps that the program took to find the answer</h3>
+            
+            <script>
+                // Have the page scroll to this point where the steps are listed
+                // document.getElementById('yorshim').scrollIntoView();
+                // or
+                document.location.hash = '#' + 'steps';
+            </script>
+
+            {% for trace_step in trace %}
+                <li>{{ trace_step }}</li>
+            {% endfor %}
+            <p></p>
+            <form method = "post">
+                <input type = "submit" name = "next" value = "Continue">
+            </form>
+        {% endif %}
+{% endblock %}

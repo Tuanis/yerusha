@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class = "home">
+		<p>This is where you can play on your own. Have fun!<br>
+		Tip: You can interrupt the Demo at any step and come here to see what would happen if you change things
+		</p>
+    </div>
+
+    <img src="{{url_for('static', filename='tree.png')}}" style="max-width:100%;">
+
+	<p></p>
+	<div>Make changes on the living status of the people in the family tree</div>
+
+	<form method = "post">
+		<table>
+			<thead>
+				<th>Name</th>
+				<th>Is Alive?</th>
+			</thead>
+			<tbody>
+				{% for person in people %}
+                    <tr>
+						<td>{{person.name}}</td>
+						<td>
+							<input type = "radio"
+								name    = "is {{person.name}} alive"
+								value   = "alive"
+								{% if person.is_alive %}
+									checked = "checked"
+								{% endif %}
+								>Alive</input>
+							<input type = "radio"
+								name    = "is {{person.name}} alive"
+								value   = "dead"
+								{% if not(person.is_alive) %}
+									checked = "checked"
+								{% endif %}
+								>Dead</input>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+    	<p></p>
+        <div>Select the person that is being morish</div>
+
+		<select name="morish">
+			{% for person in people %}
+				<option value="{{person.name}}">{{person.name}}</option>
+			{% endfor %}
+		</select>
+
+    	<p></p>
+
+		<input type = "submit" name = "go" value = "Go!">
+    </form>
+
+    {% if show_yorshim %}
+        <h1 id="yorshim">These are the Yorshim of {{ name }}</h1>
+        <script>
+            // Have the page scroll to this point where the yorshim are listed
+            // document.getElementById('yorshim').scrollIntoView();
+            // or
+            document.location.hash = '#' + 'yorshim';
+        </script>
+        {% for yoresh in yorshim %}
+            <li>{{yoresh.name}}</li>
+        {% endfor %}
+
+        <p>Do you want to see how the answer was reached?</p>
+        <form method = "post">
+            <input type = "submit" name = "yes" value = "Sure!">
+            <input type = "submit" name = "no"  value = "No, thanks">
+        </form>
+
+        {% if show_answer %}
+            <h3>These are the steps that the program took to find the answer</h3>
+            {% for trace_step in trace %}
+                <li>{{ trace_step }}</li>
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+
+{% endblock %}
