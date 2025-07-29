@@ -158,7 +158,7 @@ class Person:
         return found_yoresh
 
     def show_tree(self):
-        DotExporter(self.node).to_picture("mysite/static/tree.png")
+        DotExporter(self.node).to_picture("static/tree.png")
 
 # The Family Tree
 abraham = Person("Abraham", "אברהם")
