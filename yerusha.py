@@ -158,7 +158,13 @@ class Person:
         return found_yoresh
 
     def show_tree(self):
-        DotExporter(self.node).to_picture("static/tree.png")
+        DotExporter(self.node).to_picture("tmp/tree.png")
+
+    from flask import send_file
+
+    @app.route('/tree.png')
+    def serve_tree():
+        return send_file("/tmp/tree.png", mimetype='image/png')
 
 # The Family Tree
 abraham = Person("Abraham", "אברהם")
