@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, send_file
 from anytree import Node
 from anytree.exporter import DotExporter
 
@@ -159,8 +159,6 @@ class Person:
 
     def show_tree(self):
         DotExporter(self.node).to_picture("/tmp/tree.png")
-
-from flask import send_file
 
 @app.route('/tree.png')
 def serve_tree():
